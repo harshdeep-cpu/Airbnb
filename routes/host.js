@@ -1,12 +1,12 @@
 const express=require('express');
 const host=express.Router();
-const homesController = require('../controllers/homes');
+const hostController = require('../controllers/hostController');
 
 host.use(express.urlencoded());
 
 
-host.get('/addHome',homesController.getAddHome);
+host.get('/addHome',hostController.getAddHome);
 
-host.post('/addHome',homesController.postAddHome);
+host.post('/addHome',hostController.postAddHome);
 
-exports.host=host;
+module.exports=host;

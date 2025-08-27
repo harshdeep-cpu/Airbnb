@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const rootDir = require('../utils/pathutils');
 
-let registerdHomes=[];
 module.exports = class Home {
   constructor(houseName, price, location,rating, photoUrl){
     this.houseName = houseName;
