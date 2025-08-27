@@ -1,0 +1,39 @@
+<%- include('../partials/head')%>
+  </head>
+
+  <body class="bg-gray-100 font-sans">
+
+    <%- include('../partials/nav')%>
+
+      <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-xl">
+        <h2 class="text-2xl text-gray-800 font-bold text-center mb-6">
+          Here are our registered homes:
+        </h2>
+        <div class="grid grid-cols-1 gap-6">
+          <% registerdHomes.forEach(home=> { %>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img class="w-full h-48 object-cover" src="<%= home.photoUrl %>" alt="<%= home.houseName %>">
+              <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-800">
+                  <%= home.houseName %>
+                </h3>
+                <p class="text-gray-600 mt-2">Location: <span class="font-medium">
+                    <%= home.location %>
+                  </span></p>
+                <p class="text-gray-600 mt-2">Price: <span class="font-medium">₹<%= home.price %></span></p>
+                <p class="text-gray-600 mt-2">Rating: <span class="font-medium">
+                    <%= home.rating %> ⭐
+                  </span></p>
+                <button
+                  class="justify-center-safe bg-red-500 text-white font-bold py-2 px-4 mt-4 w-full hover:bg-red-600 transition duration-300">
+                  Book Now
+                </button>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </main>
+
+  </body>
+
+  </html>
