@@ -1,0 +1,85 @@
+<%- include('../partials/head')%>
+  </head>
+
+  <body class="bg-gradient-to-br from-blue-50 to-blue-100 font-sans">
+
+    <%- include('../partials/nav')%>
+      <main class="container mx-auto mt-12 p-8 bg-white rounded-lg shadow-lg max-w-lg">
+        <h1 class="text-4xl font-extrabold mb-6 text-center text-gray-800">
+          Sign Up to AirBnB
+        </h1>
+        <p class="text-gray-600 text-center mb-8">
+          Join us and explore amazing places to stay!
+        </p>
+        <form action="/signup" method="POST" class="space-y-6">
+          <%- include('../partials/error')%>
+            <div class="flex space-x-4">
+              <div class="relative w-1/2">
+                <input type="text" name="firstName" placeholder="First Name"
+                  value="<%= oldInput.firstName ? oldInput.firstName : ''%>"
+                  class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  required />
+                <i class="absolute left-3 top-3 text-gray-400 fas fa-user"></i>
+              </div>
+
+              <div class="relative w-1/2">
+                <input type="text" name="lastName" placeholder="Last Name"
+                  value="<%= oldInput.lastName ? oldInput.lastName : ''%>"
+                  class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  required />
+                <i class="absolute left-3 top-3 text-gray-400 fas fa-user"></i>
+              </div>
+            </div>
+
+            <div class="relative">
+              <input type="email" name="email" placeholder="Enter your Email"
+                value="<%= oldInput.email ? oldInput.email : ''%>"
+                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required />
+              <i class="absolute left-3 top-3 text-gray-400 fas fa-envelope"></i>
+            </div>
+
+            <div class="relative">
+              <input type="password" name="password" placeholder="Enter your password"
+                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required />
+              <i class="absolute left-3 top-3 text-gray-400 fas fa-lock"></i>
+            </div>
+
+            <div class="relative">
+              <input type="password" name="confirmPassword" placeholder="Confirm your password"
+                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required />
+              <i class="absolute left-3 top-3 text-gray-400 fas fa-lock"></i>
+            </div>
+
+            <div class="form-check flex flex-col items-center justify-center space-y-4 mt-4">
+              <p class="text-gray-700 font-semibold">Select your role:</p>
+              <div class="flex space-x-8">
+                <label class="form-check-label flex items-center space-x-2">
+                  <input type="radio" class="form-check-input" name="userType" id="user" value="user"
+                    checked="<%= oldInput.userType==='user'%>" required>
+                  <span class="text-gray-700">User</span>
+                </label>
+                <label class="form-check-label flex items-center space-x-2">
+                  <input type="radio" class="form-check-input" name="userType" id="host" value="host"
+                    checked="<%= oldInput.userType==='host'%>" required>
+                  <span class="text-gray-700">Host</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-check mt-4 mb-4">
+              <label class="form-check-label flex items-center space-x-2">
+                <input type="checkbox" class="form-check-input" name="termsAndCondition" id="TandC" value="on" required>
+                <span class="text-gray-700">I agree to the <a href="#" class="text-blue-500 hover:underline">Terms and
+                    Conditions</a></span>
+              </label>
+            </div>
+            <input type="submit" value="Sign Up"
+              class="w-full px-4 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 cursor-pointer transition duration-300" />
+        </form>
+      </main>
+  </body>
+
+  </html>

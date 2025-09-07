@@ -1,0 +1,42 @@
+<%- include('../partials/head')%>
+  </head>
+
+  <body class="bg-gray-100 font-sans">
+
+    <%- include('../partials/nav')%>
+
+      <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-6xl">
+        <h2 class="text-4xl text-red-500 font-extrabold text-center mb-8">
+          Here are our registered homes:
+        </h2>
+        <!-- Responsive grid -->
+        <div class="flex flex-wrap justify-center gap-8">
+          <% registerdHomes.forEach(home=> { %>
+            <!-- Card -->
+            <div
+              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:scale-105 w-full max-w-sm">
+              <img class="h-48 w-full object-cover" src="<%= home.photo %>" alt="<%= home.houseName %>">
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">
+                  <%= home.houseName %>
+                </h3>
+                <p class="text-gray-600 mb-2">Location: <span class="font-medium">
+                    <%= home.location %>
+                  </span></p>
+                <p class="text-gray-600 mt-2">Price: <span class="font-medium">₹<%= home.price %></span></p>
+                <p class="text-gray-600 mt-2">Rating: <span class="font-medium">
+                    <%= home.rating %> ⭐
+                  </span></p>
+                <button
+                  class="bg-gradient-to-r from-green-400 to-green-600 text-white font-bold py-2 px-6 mt-4 w-full rounded-lg hover:from-green-500 hover:to-green-700 transition duration-300">
+                  Book Now
+                </button>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </main>
+
+  </body>
+
+  </html>

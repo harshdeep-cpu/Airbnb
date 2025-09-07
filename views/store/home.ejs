@@ -1,44 +1,44 @@
 <%- include('../partials/head')%>
   </head>
 
-  <body class="bg-gray-100 font-sans">
+  <body class="bg-gray-50 font-sans">
 
     <%- include('../partials/nav')%>
 
-      <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10  max-w-6xl">
-        <h2 class="text-3xl text-red-500 font-bold text-center mb-6">
-          Here are our registered homes:
+      <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-6xl">
+        <h2 class="text-4xl text-red-500 font-extrabold text-center mb-8">
+          Explore Our Beautiful Homes
         </h2>
         <!-- Responsive grid -->
-        <div class="flex flex-wrap justify-center gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <% registerdHomes.forEach(home=> { %>
             <!-- Card -->
             <div
-              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 w-full max-w-sm">
-              <img class="h-48 w-full object-cover" src="<%= home.photoUrl %>" alt="<%= home.houseName %>">
-              <div class="p-4">
-                <h3 class="text-lg font-bold text-gray-800 mb-2">
+              class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:scale-105">
+              <img class="h-48 w-full object-cover" src="<%= home.photo %>" alt="<%= home.houseName %>">
+              <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">
                   <%= home.houseName %>
                 </h3>
-                <p class="text-gray-600 mb-2">Location: <span class="font-medium">
+                <p class="text-gray-600 mb-2">📍 Location: <span class="font-medium">
                     <%= home.location %>
                   </span></p>
-                <p class="text-gray-600 mt-2">Price: <span class="font-medium">₹<%= home.price %></span></p>
-                <p class="text-gray-600 mt-2">Rating: <span class="font-medium">
-                    <%= home.rating %> ⭐
+                <p class="text-gray-600 mb-2">💰 Price: <span class="font-medium">₹<%= home.price %></span></p>
+                <p class="text-gray-600 mb-4">⭐ Rating: <span class="font-medium">
+                    <%= home.rating %>
                   </span></p>
-                <button
-                  class="bg-green-500 text-white font-bold py-2 px-4 mt-4 w-50 justify-content-center align-items-lg-center hover:bg-green-900 transition duration-300">
-                  Book Now
-                </button>
+                <div class="flex justify-between items-center">
+                  <a href="/home/<%=home._id%>"
+                    class="bg-blue-500 rounded-lg text-white font-bold py-1 px-4 hover:bg-blue-700 transition duration-300">
+                    View Details
+                  </a>
+                  <%- include('../partials/favourite', {home: home}) %>
+                </div>
               </div>
             </div>
             <% }) %>
         </div>
       </main>
-
-
-
 
   </body>
 
