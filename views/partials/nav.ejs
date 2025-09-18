@@ -4,30 +4,33 @@
 
     <ul class="flex space-x-6">
       <li>
-        <a href="/" class="py-2 px-4 rounded-lg   hover:bg-red-400 hover:text-white transition duration-300">Airbnb</a>
+        <a href="/" class="py-2 px-4 rounded-lg   hover:bg-red-400 hover:text-white transition duration-300
+          <%= active==='index' ? 'bg-red-400 text-white' : ''  %>">Airbnb</a>
       </li>
       <% if (isLoggedIn) { %>
         <%if(user && user.userType==='user' ) {%>
           <li>
             <a href="/home"
-              class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300">Home-List</a>
+              class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300 <%= active==='home' ? 'bg-red-400 text-white' : ''  %>">Home-List</a>
           </li>
           <li>
             <a href="/bookings"
-              class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300">Bookings</a>
+              class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300 <%= active==='bookings' ? 'bg-red-400 text-white' : ''  %>">Bookings</a>
           </li>
           <li>
             <a href="/favourite"
-              class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300">Favourite</a>
+              class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300 <%= active==='favourite' ? 'bg-red-400 text-white' : ''  %>">Favourite</a>
           </li>
           <%} else{%>
             <li>
               <a href="/host/host-home-list"
-                class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300">Host Home</a>
+                class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300 <%= active==='host-home-list' ? 'bg-red-400 text-white' : ''  %>">Host
+                Home</a>
             </li>
             <li>
               <a href="/host/addHome"
-                class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300">Add Home</a>
+                class="py-2 px-4 rounded-lg hover:bg-red-400 hover:text-white transition duration-300 <%= active==='edit-home' ? 'bg-red-400 text-white' : ''  %>">Add
+                Home</a>
             </li>
             <%}%>
               <% } %>

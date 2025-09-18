@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const userSchema = mongoose.Schema({
   firstName:{
     type: String,
@@ -26,6 +25,10 @@ const userSchema = mongoose.Schema({
   favourite: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Home'
+  }],
+  bookings: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Booking'
   }]
 });
 

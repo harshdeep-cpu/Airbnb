@@ -1,16 +1,12 @@
 
 const Home = require("../models/home");
+const User = require("../models/user");
 const fs = require('fs');
 
-exports.getHostHome = (req, res, next) => {
-  Home.find().then((registerdHomes) => {
-    res.render("host/host-home-list", {
-      registerdHomes: registerdHomes,
-      pageTitle: "Host Home",
-      isLoggedIn: req.isLoggedIn,
-      user: req.session.user,
-    });
-  });
+exports.getHostHome = async (req, res, next) => {
+  const hostId = req.session.user._id;
+  const homes = await Home.find({ host: hostId }).populate('host') || [];
+  res.render('host/host-home-list', { registerdHomes: homes, pageTitle: 'Host home list',isLoggedIn: req.isLoggedIn, user: req.session.user, active: "host-home-list" });
 };
 
 exports.getEditHome = (req, res, next) => {
@@ -29,6 +25,7 @@ exports.getEditHome = (req, res, next) => {
       editMode: editMode,
       isLoggedIn: req.isLoggedIn,
       user: req.session.user,
+      active: "edit-home"
     });
   });
 };
@@ -68,6 +65,7 @@ exports.getAddHome = (req, res, next) => {
     editMode: editMode,
     isLoggedIn: req.isLoggedIn,
     user: req.session.user,
+    active: "edit-home"
   });
 };
 exports.postDeleteHome = (req, res, next) => {
@@ -83,7 +81,7 @@ exports.postDeleteHome = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, description } = req.body;
   console.log(req.file)
-  const photo=req.file.path;
+  const photo = req.file ? '/uploads/' + req.file.filename : null;
   const home = new Home({
     houseName,
     price,
@@ -91,6 +89,7 @@ exports.postAddHome = (req, res, next) => {
     rating,
     photo,
     description,
+    host: req.session.user._id
   });
   home.save().then(() => {
     console.log("Home save successfully");

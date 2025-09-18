@@ -3,7 +3,7 @@ const User = require("../models/user");
 const bcrypt = require('bcryptjs')
 
 exports.getLogin = (req, res, next) => {
-  res.render("auth/login" , {pageTitle: 'Login',isLoggedIn:false, errors: [], oldInput:{email: ''}, user: {}});
+  res.render("auth/login" , {pageTitle: 'Login',isLoggedIn:false, errors: [], oldInput:{email: ''}, user: {}, active: ""});
 };
 
 
@@ -16,7 +16,8 @@ exports.postLogin = async (req,res,next)=>{
       isLoggedIn: false,
       errors: ["User does not exist"],
       oldInput: {email},
-      user:{}
+      user:{},
+      active: ""
     });
   }
   const match = await bcrypt.compare(password,user.password);
@@ -26,7 +27,8 @@ exports.postLogin = async (req,res,next)=>{
       isLoggedIn: false,
       errors: ["Invalid password"],
       oldInput: {email},
-      user:{}
+      user:{},
+      active: ""
     })
   }
   req.session.isLoggedIn=true;
@@ -42,7 +44,7 @@ exports.postLogout = (req,res,next)=>{
 }
 
 exports.getSignUp = (req,res,next)=>{
-  res.render("auth/signup", {pageTitle:'Sign Up', isLoggedIn: false, errors: [], oldInput: {firstName: "", lastName: "", email: "", password: "", userType: ""}, user: {}});
+  res.render("auth/signup", {pageTitle:'Sign Up', isLoggedIn: false, errors: [], oldInput: {firstName: "", lastName: "", email: "", password: "", userType: ""}, user: {}, active: ""});
 }
 
 exports.postSignUp = [
@@ -113,7 +115,8 @@ exports.postSignUp = [
           email,
           userType
         },
-        user: {}
+        user: {},
+        active: ""
       }); 
     }
 
@@ -134,7 +137,8 @@ exports.postSignUp = [
           email,
           userType
         },
-        user:{}
+        user:{},
+        active: ""
       })
     })
 }]

@@ -11,6 +11,7 @@ const rootDir=require('./utils/pathutils');
 const homeController=require('./controllers/error');
 const  {default: mongoose} = require('mongoose');
 const { ExpressValidator } = require('express-validator');
+const booking = require('./routes/booking');
 
 
 const app=express();
@@ -72,7 +73,11 @@ app.use("/host", (req, res, next) => {
 });
 
 app.use("/host",host);
+app.use(booking);
+// app.use(express.json());
+// app.use(cors());
 
+// app.use('/api',router);
 
 app.use(homeController.Page404);
 

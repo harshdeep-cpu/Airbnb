@@ -1,0 +1,57 @@
+<%- include('../partials/head')%>
+  </head>
+
+  <body class="bg-gray-50 font-sans">
+    <script>
+      document.getElementById("pay-btn").addEventListener("click", async function () {
+        const homeId = document.getElementById("homeId").value;
+
+        const response = await fetch("/booking/payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ homeId })
+        });
+
+        const order = await response.json();
+
+        if (!order.id) {
+          alert("Failed to create order");
+          return;
+        }
+
+        const options = {
+          key: "<%= process.env.RAZORPAY_KEY_ID %>",
+          amount: order.amount,
+          currency: order.currency,
+          name: "Airbnb Clone",
+          description: "Booking Payment",
+          order_id: order.id,
+          handler: async function (response) {
+            const verifyRes = await fetch("/booking/verify", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                order_id: response.razorpay_order_id,
+                payment_id: response.razorpay_payment_id,
+                signature: response.razorpay_signature
+              })
+            });
+
+            const result = await verifyRes.json();
+            if (result.success) {
+              alert("Payment successful!");
+              window.location.href = "/bookings";
+            } else {
+              alert("Payment verification failed.");
+            }
+          },
+          theme: { color: "#F37254" }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      });
+    </script>
+  </body>
+
+  </html>
